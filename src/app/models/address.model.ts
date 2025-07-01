@@ -1,18 +1,3 @@
-export interface AddressOld {
-    province: string;
-    district: string;
-    ward: string;
-    code: string;
-}
-
-export interface AddressNew {
-    id: string;
-    province: string;
-    district: string;
-    ward: string;
-    mergedWards: string[];
-}
-
 export interface OldProvinceAddress {
     oldProvinceID: string;
     oldProvinceName: string;

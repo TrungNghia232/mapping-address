@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AddressOld, AddressNew, NewProvinceAddress, NewWardAddress, OldProvinceAddress, OldDistrictAddress, OldWardAddress } from '../models/address.model';
+import { NewProvinceAddress, NewWardAddress, OldProvinceAddress, OldDistrictAddress, OldWardAddress } from '../models/address.model';
 
 @Injectable({ providedIn: 'root' })
 export class AddressService {
