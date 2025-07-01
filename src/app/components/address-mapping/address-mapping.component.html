@@ -5,7 +5,7 @@
     <h3>Địa chỉ cũ</h3>
     <mat-form-field appearance="fill">
       <mat-label>Tỉnh</mat-label>
-      <mat-select (selectionChange)="onOldProvinceChange($event.value)">
+      <mat-select [value]="selectedOldProvinceID" (selectionChange)="onOldProvinceChange($event.value)">
         @for (p of listOldProvince; track p.oldProvinceID) {
         <mat-option [value]="p.oldProvinceID">{{ p.oldProvinceName }}</mat-option>
         }
@@ -14,7 +14,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Quận/Huyện</mat-label>
-      <mat-select (selectionChange)="onOldDistrictChange($event.value)">
+      <mat-select [value]="selectedOldDistrictID" (selectionChange)="onOldDistrictChange($event.value)">
         @for (d of listOldDistrict; track d.oldDistrictID) {
         <mat-option [value]="d.oldDistrictID">{{ d.oldDistrictName }}</mat-option>
         }
@@ -36,7 +36,7 @@
     <h3>Địa chỉ mới</h3>
     <mat-form-field appearance="fill">
       <mat-label>Tỉnh</mat-label>
-      <mat-select [value]="selectedProvinceID" (selectionChange)="onNewProvinceChange($event.value)">
+      <mat-select [value]="selectedNewProvinceID" (selectionChange)="onNewProvinceChange($event.value)">
         @for (p of listNewProvince; track p.newProvinceID) {
         <mat-option [value]="p.newProvinceID">{{ p.newProvinceName }}</mat-option>
         }
@@ -45,35 +45,11 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Phường/Xã</mat-label>
-      <mat-select [value]="selectedWardID" (selectionChange)="onNewWardChange()">
+      <mat-select [value]="selectedNewWardID" (selectionChange)="onNewWardChange($event.value)">
         @for (w of listNewWard; track w.newWardID) {
         <mat-option [value]="w.newWardID">{{ w.newWardName }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
 
-    <!-- Danh sách phường cũ nếu có -->
-    <!-- @if (selectedNew) {
-    <div>
-      <p><strong>Gồm các phường cũ:</strong></p>
-      <ul>
-        @for (old of selectedNew.mergedWards; track old) {
-        <li>{{ old }}</li>
-        }
-      </ul>
-    </div>
-    }
-  </div> -->
 </div>
-
-<!-- Highlight mapping -->
-<!-- <div style="margin-top: 24px;">
-  @if (selectedOld && selectedNew) {
-  <mat-card color="primary">
-    <mat-card-content>
-      <p><strong>Mapping:</strong></p>
-      <p>{{ selectedOld!.ward }} → {{ selectedNew!.ward }}</p>
-    </mat-card-content>
-  </mat-card>
-  }
-</div> -->

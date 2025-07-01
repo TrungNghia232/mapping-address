@@ -26,7 +26,9 @@
   {
     "newProvinceID": "203",
     "newProvinceName": "Cao Bằng",
-    "mergeProvince": []
+    "mergeProvince": [
+      "004"
+    ]
   },
   {
     "newProvinceID": 605,
@@ -39,7 +41,9 @@
   {
     "newProvinceID": "301",
     "newProvinceName": "Điện Biên",
-    "mergeProvince": []
+    "mergeProvince": [
+      "011"
+    ]
   },
   {
     "newProvinceID": "713",
@@ -68,7 +72,9 @@
   {
     "newProvinceID": "405",
     "newProvinceName": "Hà Tĩnh",
-    "mergeProvince": []
+    "mergeProvince": [
+      "042"
+    ]
   },
   {
     "newProvinceID": "109",
@@ -89,7 +95,9 @@
   {
     "newProvinceID": "302",
     "newProvinceName": "Lai Châu",
-    "mergeProvince": []
+    "mergeProvince": [
+      "012"
+    ]
   },
   {
     "newProvinceID": "703",
@@ -103,7 +111,9 @@
   {
     "newProvinceID": "209",
     "newProvinceName": "Lạng Sơn",
-    "mergeProvince": []
+    "mergeProvince": [
+      "020"
+    ]
   },
   {
     "newProvinceID": "205",
@@ -116,7 +126,9 @@
   {
     "newProvinceID": "403",
     "newProvinceName": "Nghệ An",
-    "mergeProvince": []
+    "mergeProvince": [
+      "040"
+    ]
   },
   {
     "newProvinceID": "117",
@@ -147,7 +159,9 @@
   {
     "newProvinceID": "225",
     "newProvinceName": "Quảng Ninh",
-    "mergeProvince": []
+    "mergeProvince": [
+      "022"
+    ]
   },
   {
     "newProvinceID": "409",
@@ -160,7 +174,9 @@
   {
     "newProvinceID": "303",
     "newProvinceName": "Sơn La",
-    "mergeProvince": []
+    "mergeProvince": [
+      "014"
+    ]
   },
   {
     "newProvinceID": "709",
@@ -181,7 +197,9 @@
   {
     "newProvinceID": "401",
     "newProvinceName": "Thanh Hóa",
-    "mergeProvince": []
+    "mergeProvince": [
+      "038"
+    ]
   },
   {
     "newProvinceID": "815",
@@ -203,7 +221,9 @@
   {
     "newProvinceID": "101",
     "newProvinceName": "Hà Nội",
-    "mergeProvince": []
+    "mergeProvince": [
+      "001"
+    ]
   },
   {
     "newProvinceID": "103",
@@ -225,7 +245,9 @@
   {
     "newProvinceID": "411",
     "newProvinceName": "Huế",
-    "mergeProvince": []
+    "mergeProvince": [
+      "046"
+    ]
   },
   {
     "newProvinceID": "211",

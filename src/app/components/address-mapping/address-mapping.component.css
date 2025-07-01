@@ -1,21 +1,52 @@
 .address-mapping {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 24px;
+  background-color: #f5f7fa;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.4s ease-in-out;
 }
 
-.old-address {
-  
-}
-
+.old-address,
 .new-address {
+  flex: 1 1 300px;
+  min-width: 300px;
+  padding: 16px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.old-address:hover,
+.new-address:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 mat-form-field {
-  margin-bottom: 16px;
+  display: block;
   width: 100%;
+  margin-bottom: 16px;
 }
 
-mat-card {
-  border-left: 4px solid #2196f3;
-  padding    : 12px;
-  background : #f1f9ff;
+h3 {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

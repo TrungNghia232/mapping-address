@@ -22,8 +22,11 @@ export class AddressMappingComponent implements OnInit {
     oldDistricts: OldDistrictAddress[] = [];
     oldWards: OldWardAddress[] = [];
 
-    selectedProvinceID: string = '';
-    selectedWardID: string = '';
+    selectedNewProvinceID: string = '';
+    selectedNewWardID: string = '';
+
+    selectedOldProvinceID: string = '';
+    selectedOldDistrictID: string = '';
 
     listOldProvince: OldProvinceAddress[] = [];
     listOldDistrict: OldDistrictAddress[] = [];
@@ -62,8 +65,8 @@ export class AddressMappingComponent implements OnInit {
         console.log("mapping", mapping);
 
         if (mapping) {
-            this.selectedProvinceID = mapping.newProvinceID || '';
-            console.log("selectedProvinceID", this.selectedProvinceID);
+            this.selectedNewProvinceID = mapping.newProvinceID || '';
+            console.log("selectedNewProvinceID", this.selectedNewProvinceID);
         }
         this.listOldDistrict = [
             ...new Set(
@@ -73,11 +76,11 @@ export class AddressMappingComponent implements OnInit {
         ];
         this.listOldWard = [];
 
-        this.selectedWardID = '';
+        this.selectedNewWardID = '';
         this.listNewWard = [
             ...new Set(
                 this.newWards.
-                    filter(a => a.newProvinceID === this.selectedProvinceID)
+                    filter(a => a.newProvinceID === this.selectedNewProvinceID)
             )
         ];
     }
@@ -95,38 +98,96 @@ export class AddressMappingComponent implements OnInit {
         console.log("mapping", mapping);
 
         if (mapping) {
-            this.selectedWardID = mapping.newWardID || '';
-            console.log(this.selectedWardID);
+            this.selectedNewWardID = mapping.newWardID || '';
+            console.log(this.selectedNewWardID);
         }
     }
 
     onNewProvinceChange(newProvinceID: string) {
-        // Tìm trong danh sách newProvince để lấy danh sách các tỉnh cũ đã sáp nhập
+        // Tìm tỉnh mới được chọn
         const mapping = this.newProvince.find(p => p.newProvinceID === newProvinceID);
 
         if (mapping) {
-            // Lọc các tỉnh cũ từ danh sách full theo các mã mergeProvince
-            this.listOldProvince = this.oldProvince.filter(p =>
+            // Lấy danh sách các tỉnh cũ được sáp nhập vào tỉnh mới
+            const mergedOldProvinces = this.oldProvince.filter(p =>
                 mapping.mergeProvince.includes(p.oldProvinceID)
             );
+            this.listOldProvince = mergedOldProvinces;
+
+            // ✅ Nếu chỉ có 1 tỉnh cũ → chọn luôn
+            if (mergedOldProvinces.length === 1) {
+                this.selectedOldProvinceID = mergedOldProvinces[0].oldProvinceID;
+
+                // Lọc huyện cũ theo tỉnh cũ đó
+                this.listOldDistrict = this.oldDistricts.filter(d =>
+                    d.oldProvinceID ===  this.selectedOldProvinceID
+                );
+
+            } else {
+                this.listOldDistrict = [];
+            }
+
         } else {
             this.listOldProvince = [];
+            this.listOldDistrict = [];
         }
-        // Tạm thời chưa chọn huyện, đợi người dùng chọn tỉnh
-        this.listOldDistrict = [];
+
         this.listOldWard = [];
 
-        // Cập nhật dữ liệu dropdown phường/xã mới
-        this.listNewWard = [
-            ...new Set(
-                this.newWards
-                    .filter(a => a.newProvinceID === newProvinceID)
-            )
-        ];
+        // Cập nhật dữ liệu dropdown phường/xã mới thuộc tỉnh mới
+        this.listNewWard = this.newWards.filter(w =>
+            w.newProvinceID === newProvinceID
+        );
     }
 
-    onNewWardChange() {
-        this.listOldDistrict = []   
-        this.listOldWard = []
+
+    onNewWardChange(newWardID: string) {
+        // Tìm thông tin phường/xã mới được chọn
+        const mapping = this.newWards.find(nw => nw.newWardID === newWardID);
+        if (!mapping) {
+            this.listOldDistrict = [];
+            this.listOldWard = [];
+            return;
+        }
+        console.log("mapping", mapping);
+
+        const mergedOldWardIDs = mapping.mergeWard;
+        console.log("mergedOldWardIDs", mergedOldWardIDs);
+
+        // Lọc ra các phường/xã cũ từ mergeWard
+        const mergedOldWards = this.oldWards.filter(ward =>
+            mergedOldWardIDs.includes(ward.oldWardID)
+        );
+        console.log("mergedOldWards", mergedOldWards);
+
+        // Lấy danh sách các huyện từ các xã cũ
+        const districtIDs = Array.from(
+            new Set(mergedOldWards.map(w => w.oldDistrictID))
+        );
+        console.log("districtIDs", districtIDs);
+
+        if (districtIDs.length === 1) {
+            // Nếu chỉ có 1 huyện → chọn luôn
+            this.selectedOldDistrictID = districtIDs[0];
+            this.listOldDistrict = this.oldDistricts.filter(d => d.oldDistrictID === this.selectedOldDistrictID);
+
+            this.listOldWard = mergedOldWards;
+
+            // 🔁 Tìm tỉnh chứa huyện này
+            const district = this.oldDistricts.find(d => d.oldDistrictID === this.selectedOldDistrictID);
+            if (district) {
+                const provinceID = district.oldProvinceID;
+                this.selectedOldProvinceID = provinceID || '';
+            }
+        } else {
+            // Nếu nhiều huyện → cho người dùng chọn từ danh sách huyện có liên quan
+            this.listOldDistrict = this.oldDistricts.filter(d =>
+                districtIDs.includes(d.oldDistrictID)
+            );
+
+            // Xóa danh sách xã → chờ người dùng chọn huyện
+            this.listOldWard = [];
+        }
     }
+
 }
