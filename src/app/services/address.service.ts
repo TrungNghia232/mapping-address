@@ -7,31 +7,23 @@ import { AddressOld, AddressNew, NewProvinceAddress, NewWardAddress, OldProvince
 export class AddressService {
     constructor(private http: HttpClient) { }
 
-    getOldAddresses(): Observable<AddressOld[]> {
-        return this.http.get<AddressOld[]>('assets/data/old-addresses.json');
-    }
-
-    getNewAddresses(): Observable<AddressNew[]> {
-        return this.http.get<AddressNew[]>('assets/data/new-addresses.json');
-    }
-
     getNewProvince(): Observable<NewProvinceAddress[]> {
-        return this.http.get<NewProvinceAddress[]>('assets/data/new-province.json');
+        return this.http.get<NewProvinceAddress[]>('/assets/data/new-province.json');
     }
 
     getNewWards(): Observable<NewWardAddress[]> {
-        return this.http.get<NewWardAddress[]>('assets/data/new-ward.json');
+        return this.http.get<NewWardAddress[]>('/assets/data/new-ward.json');
     }
 
     getOldProvince(): Observable<OldProvinceAddress[]> {
-        return this.http.get<OldProvinceAddress[]>('assets/data/old-province.json');
+        return this.http.get<OldProvinceAddress[]>('/assets/data/old-province.json');
     }
 
     getOldDistrict(): Observable<OldDistrictAddress[]> {
-        return this.http.get<OldDistrictAddress[]>('assets/data/old-district.json');
+        return this.http.get<OldDistrictAddress[]>('/assets/data/old-district.json');
     }
 
     getOldWard(): Observable<OldWardAddress[]> {
-        return this.http.get<OldWardAddress[]>('assets/data/old-ward.json');
+        return this.http.get<OldWardAddress[]>('/assets/data/old-ward.json');
     }
 }
