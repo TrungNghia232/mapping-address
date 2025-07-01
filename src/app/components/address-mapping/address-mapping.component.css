@@ -1,0 +1,21 @@
+.address-mapping {
+}
+
+.old-address {
+  
+}
+
+.new-address {
+
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+mat-card {
+  border-left: 4px solid #2196f3;
+  padding    : 12px;
+  background : #f1f9ff;
+}

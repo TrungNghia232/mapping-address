@@ -1,0 +1,254 @@
+[
+  {
+    "oldProvinceID": "001",
+    "oldProvinceName": "Thành phố Hà Nội"
+  },
+  {
+    "oldProvinceID": "002",
+    "oldProvinceName": "Tỉnh Hà Giang"
+  },
+  {
+    "oldProvinceID": "004",
+    "oldProvinceName": "Tỉnh Cao Bằng"
+  },
+  {
+    "oldProvinceID": "006",
+    "oldProvinceName": "Tỉnh Bắc Kạn"
+  },
+  {
+    "oldProvinceID": "008",
+    "oldProvinceName": "Tỉnh Tuyên Quang"
+  },
+  {
+    "oldProvinceID": "010",
+    "oldProvinceName": "Tỉnh Lào Cai"
+  },
+  {
+    "oldProvinceID": "011",
+    "oldProvinceName": "Tỉnh Điện Biên"
+  },
+  {
+    "oldProvinceID": "012",
+    "oldProvinceName": "Tỉnh Lai Châu"
+  },
+  {
+    "oldProvinceID": "014",
+    "oldProvinceName": "Tỉnh Sơn La"
+  },
+  {
+    "oldProvinceID": "015",
+    "oldProvinceName": "Tỉnh Yên Bái"
+  },
+  {
+    "oldProvinceID": "017",
+    "oldProvinceName": "Tỉnh Hòa Bình"
+  },
+  {
+    "oldProvinceID": "019",
+    "oldProvinceName": "Tỉnh Thái Nguyên"
+  },
+  {
+    "oldProvinceID": "020",
+    "oldProvinceName": "Tỉnh Lạng Sơn"
+  },
+  {
+    "oldProvinceID": "022",
+    "oldProvinceName": "Tỉnh Quảng Ninh"
+  },
+  {
+    "oldProvinceID": "024",
+    "oldProvinceName": "Tỉnh Bắc Giang"
+  },
+  {
+    "oldProvinceID": "025",
+    "oldProvinceName": "Tỉnh Phú Thọ"
+  },
+  {
+    "oldProvinceID": "026",
+    "oldProvinceName": "Tỉnh Vĩnh Phúc"
+  },
+  {
+    "oldProvinceID": "027",
+    "oldProvinceName": "Tỉnh Bắc Ninh"
+  },
+  {
+    "oldProvinceID": "030",
+    "oldProvinceName": "Tỉnh Hải Dương"
+  },
+  {
+    "oldProvinceID": "031",
+    "oldProvinceName": "Thành phố Hải Phòng"
+  },
+  {
+    "oldProvinceID": "033",
+    "oldProvinceName": "Tỉnh Hưng Yên"
+  },
+  {
+    "oldProvinceID": "034",
+    "oldProvinceName": "Tỉnh Thái Bình"
+  },
+  {
+    "oldProvinceID": "035",
+    "oldProvinceName": "Tỉnh Hà Nam"
+  },
+  {
+    "oldProvinceID": "036",
+    "oldProvinceName": "Tỉnh Nam Định"
+  },
+  {
+    "oldProvinceID": "037",
+    "oldProvinceName": "Tỉnh Ninh Bình"
+  },
+  {
+    "oldProvinceID": "038",
+    "oldProvinceName": "Tỉnh Thanh Hóa"
+  },
+  {
+    "oldProvinceID": "040",
+    "oldProvinceName": "Tỉnh Nghệ An"
+  },
+  {
+    "oldProvinceID": "042",
+    "oldProvinceName": "Tỉnh Hà Tĩnh"
+  },
+  {
+    "oldProvinceID": "044",
+    "oldProvinceName": "Tỉnh Quảng Bình"
+  },
+  {
+    "oldProvinceID": "045",
+    "oldProvinceName": "Tỉnh Quảng Trị"
+  },
+  {
+    "oldProvinceID": "046",
+    "oldProvinceName": "Thành phố Huế"
+  },
+  {
+    "oldProvinceID": "048",
+    "oldProvinceName": "Thành phố Đà Nẵng"
+  },
+  {
+    "oldProvinceID": "049",
+    "oldProvinceName": "Tỉnh Quảng Nam"
+  },
+  {
+    "oldProvinceID": "051",
+    "oldProvinceName": "Tỉnh Quảng Ngãi"
+  },
+  {
+    "oldProvinceID": "052",
+    "oldProvinceName": "Tỉnh Bình Định"
+  },
+  {
+    "oldProvinceID": "054",
+    "oldProvinceName": "Tỉnh Phú Yên"
+  },
+  {
+    "oldProvinceID": "056",
+    "oldProvinceName": "Tỉnh Khánh Hòa"
+  },
+  {
+    "oldProvinceID": "058",
+    "oldProvinceName": "Tỉnh Ninh Thuận"
+  },
+  {
+    "oldProvinceID": "060",
+    "oldProvinceName": "Tỉnh Bình Thuận"
+  },
+  {
+    "oldProvinceID": "062",
+    "oldProvinceName": "Tỉnh Kon Tum"
+  },
+  {
+    "oldProvinceID": "064",
+    "oldProvinceName": "Tỉnh Gia Lai"
+  },
+  {
+    "oldProvinceID": "066",
+    "oldProvinceName": "Tỉnh Đắk Lắk"
+  },
+  {
+    "oldProvinceID": "067",
+    "oldProvinceName": "Tỉnh Đắk Nông"
+  },
+  {
+    "oldProvinceID": "068",
+    "oldProvinceName": "Tỉnh Lâm Đồng"
+  },
+  {
+    "oldProvinceID": "070",
+    "oldProvinceName": "Tỉnh Bình Phước"
+  },
+  {
+    "oldProvinceID": "072",
+    "oldProvinceName": "Tỉnh Tây Ninh"
+  },
+  {
+    "oldProvinceID": "074",
+    "oldProvinceName": "Tỉnh Bình Dương"
+  },
+  {
+    "oldProvinceID": "075",
+    "oldProvinceName": "Tỉnh Đồng Nai"
+  },
+  {
+    "oldProvinceID": "077",
+    "oldProvinceName": "Tỉnh Bà Rịa - Vũng Tàu"
+  },
+  {
+    "oldProvinceID": "079",
+    "oldProvinceName": "Thành phố Hồ Chí Minh"
+  },
+  {
+    "oldProvinceID": "080",
+    "oldProvinceName": "Tỉnh Long An"
+  },
+  {
+    "oldProvinceID": "082",
+    "oldProvinceName": "Tỉnh Tiền Giang"
+  },
+  {
+    "oldProvinceID": "083",
+    "oldProvinceName": "Tỉnh Bến Tre"
+  },
+  {
+    "oldProvinceID": "084",
+    "oldProvinceName": "Tỉnh Trà Vinh"
+  },
+  {
+    "oldProvinceID": "086",
+    "oldProvinceName": "Tỉnh Vĩnh Long"
+  },
+  {
+    "oldProvinceID": "087",
+    "oldProvinceName": "Tỉnh Đồng Tháp"
+  },
+  {
+    "oldProvinceID": "089",
+    "oldProvinceName": "Tỉnh An Giang"
+  },
+  {
+    "oldProvinceID": "091",
+    "oldProvinceName": "Tỉnh Kiên Giang"
+  },
+  {
+    "oldProvinceID": "092",
+    "oldProvinceName": "Thành phố Cần Thơ"
+  },
+  {
+    "oldProvinceID": "093",
+    "oldProvinceName": "Tỉnh Hậu Giang"
+  },
+  {
+    "oldProvinceID": "094",
+    "oldProvinceName": "Tỉnh Sóc Trăng"
+  },
+  {
+    "oldProvinceID": "095",
+    "oldProvinceName": "Tỉnh Bạc Liêu"
+  },
+  {
+    "oldProvinceID": "096",
+    "oldProvinceName": "Tỉnh Cà Mau"
+  }
+]

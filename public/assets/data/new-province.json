@@ -1,0 +1,247 @@
+[
+  {
+    "newProvinceID": "805",
+    "newProvinceName": "An Giang",
+    "mergeProvince": [
+      "091",
+      "089"
+    ]
+  },
+  {
+    "newProvinceID": "223",
+    "newProvinceName": "Bắc Ninh",
+    "mergeProvince": [
+      "024",
+      "027"
+    ]
+  },
+  {
+    "newProvinceID": "823",
+    "newProvinceName": "Cà Mau",
+    "mergeProvince": [
+      "095",
+      "096"
+    ]
+  },
+  {
+    "newProvinceID": "203",
+    "newProvinceName": "Cao Bằng",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": 605,
+    "newProvinceName": "Đắk Lắk",
+    "mergeProvince": [
+      "054",
+      "066"
+    ]
+  },
+  {
+    "newProvinceID": "301",
+    "newProvinceName": "Điện Biên",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": "713",
+    "newProvinceName": "Đồng Nai",
+    "mergeProvince": [
+      "070",
+      "075"
+    ]
+  },
+  {
+    "newProvinceID": "803",
+    "newProvinceName": "Đồng Tháp",
+    "mergeProvince": [
+      "082",
+      "087"
+    ]
+  },
+  {
+    "newProvinceID": "603",
+    "newProvinceName": "Gia Lai",
+    "mergeProvince": [
+      "064",
+      "052"
+    ]
+  },
+  {
+    "newProvinceID": "405",
+    "newProvinceName": "Hà Tĩnh",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": "109",
+    "newProvinceName": "Hưng Yên",
+    "mergeProvince": [
+      "034",
+      "033"
+    ]
+  },
+  {
+    "newProvinceID": "511",
+    "newProvinceName": "Khánh Hòa",
+    "mergeProvince": [
+      "056",
+      "058"
+    ]
+  },
+  {
+    "newProvinceID": "302",
+    "newProvinceName": "Lai Châu",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": "703",
+    "newProvinceName": "Lâm Đồng",
+    "mergeProvince": [
+      "067",
+      "068",
+      "060"
+    ]
+  },
+  {
+    "newProvinceID": "209",
+    "newProvinceName": "Lạng Sơn",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": "205",
+    "newProvinceName": "Lào Cai",
+    "mergeProvince": [
+      "010",
+      "015"
+    ]
+  },
+  {
+    "newProvinceID": "403",
+    "newProvinceName": "Nghệ An",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": "117",
+    "newProvinceName": "Ninh Bình",
+    "mergeProvince": [
+      "035",
+      "037",
+      "036"
+    ]
+  },
+  {
+    "newProvinceID": "217",
+    "newProvinceName": "Phú Thọ",
+    "mergeProvince": [
+      "017",
+      "026",
+      "025"
+    ]
+  },
+  {
+    "newProvinceID": "505",
+    "newProvinceName": "Quảng Ngãi",
+    "mergeProvince": [
+      "051",
+      "062"
+    ]
+  },
+  {
+    "newProvinceID": "225",
+    "newProvinceName": "Quảng Ninh",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": "409",
+    "newProvinceName": "Quảng Trị",
+    "mergeProvince": [
+      "044",
+      "045"
+    ]
+  },
+  {
+    "newProvinceID": "303",
+    "newProvinceName": "Sơn La",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": "709",
+    "newProvinceName": "Tây Ninh",
+    "mergeProvince": [
+      "080",
+      "072"
+    ]
+  },
+  {
+    "newProvinceID": "215",
+    "newProvinceName": "Thái Nguyên",
+    "mergeProvince": [
+      "006",
+      "019"
+    ]
+  },
+  {
+    "newProvinceID": "401",
+    "newProvinceName": "Thanh Hóa",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": "815",
+    "newProvinceName": "Cần Thơ",
+    "mergeProvince": [
+      "094",
+      "093",
+      "092"
+    ]
+  },
+  {
+    "newProvinceID": "501",
+    "newProvinceName": "Đà Nẵng",
+    "mergeProvince": [
+      "049",
+      "048"
+    ]
+  },
+  {
+    "newProvinceID": "101",
+    "newProvinceName": "Hà Nội",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": "103",
+    "newProvinceName": "Hải Phòng",
+    "mergeProvince": [
+      "030",
+      "031"
+    ]
+  },
+  {
+    "newProvinceID": "701",
+    "newProvinceName": "Hồ Chí Minh",
+    "mergeProvince": [
+      "074",
+      "079",
+      "077"
+    ]
+  },
+  {
+    "newProvinceID": "411",
+    "newProvinceName": "Huế",
+    "mergeProvince": []
+  },
+  {
+    "newProvinceID": "211",
+    "newProvinceName": "Tuyên Quang",
+    "mergeProvince": [
+      "002",
+      "008"
+    ]
+  },
+  {
+    "newProvinceID": "809",
+    "newProvinceName": "Vĩnh Long",
+    "mergeProvince": [
+      "083",
+      "086",
+      "084"
+    ]
+  }
+]
