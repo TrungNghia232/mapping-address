@@ -26,7 +26,7 @@
         [displayWith]="displayFn"
     >
         @for (province of filteredProvinces; track province.newProvinceID) {
-            <mat-option  [value]="province">
+            <mat-option [value]="province">
                 {{ province.newProvinceName }}
             </mat-option>
         }

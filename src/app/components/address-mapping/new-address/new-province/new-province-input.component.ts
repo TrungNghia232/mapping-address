@@ -41,7 +41,7 @@ export class NewProvinceAutocompleteComponent implements OnInit {
 
 
   displayFn = (province: NewProvinceAddress | string): string =>
-    typeof province === 'string' ? province : province?.newProvinceName;
+          typeof province === 'string' ? province : province?.newProvinceName;
 
   private _filterProvinces(value: string): NewProvinceAddress[] {
     const filterValue = value.toLowerCase();

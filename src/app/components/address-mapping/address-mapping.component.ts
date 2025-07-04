@@ -85,8 +85,8 @@ export class AddressMappingComponent implements OnInit {
         console.log("mapping", mapping);
 
         if (mapping) {
-            this.newProvinceControl.setValue(mapping.newProvinceID)
-            console.log("selectedNewProvinceID", this.newProvinceControl.value);
+            this.newProvinceControl.setValue(mapping.newProvinceName || '');
+            console.log("new province selected: ", this.newProvinceControl.value);
         }
         this.listOldDistrict = [
             ...new Set(
@@ -99,26 +99,13 @@ export class AddressMappingComponent implements OnInit {
         this.oldDistrictControl.setValue('');
         this.listOldWard = [];
 
-        this.oldDistrictControl.setValue('');
-        this.newProvinceControl.setValue('');
+        this.newWardControl.setValue('');
         this.listNewWard = [
             ...new Set(
                 this.newWards.
                     filter(a => a.newProvinceID === this.newProvinceControl.value)
             )
         ];
-    }
-
-    onOldProvinceCleared(): void {
-        this.oldProvinceControl.setValue('');
-        this.oldDistrictControl.setValue('');
-        this.oldWardControl.setValue('');
-
-        this.listOldDistrict = [];
-        this.listOldWard = [];
-        this.newProvinceControl.setValue('');
-        this.newWardControl.setValue('');
-        this.listNewWard = [];
     }
 
     onOldDistrictChange(oldDistrictID: string) {
@@ -129,14 +116,6 @@ export class AddressMappingComponent implements OnInit {
         console.log("listOldWard", this.listOldWard);
     }
 
-    onOldDistrictCleared(): void {
-        this.oldDistrictControl.setValue('');
-        this.oldWardControl.setValue('');
-        this.listOldWard = [];
-        this.newWardControl.setValue('');
-        this.listNewWard = [];
-    }
-
     onOldWardChange(ward: string) {
         console.log("ward", ward);
         const mapping = this.newWards.find(nw =>
@@ -145,15 +124,9 @@ export class AddressMappingComponent implements OnInit {
         console.log("mapping", mapping);
 
         if (mapping) {
-            this.newWardControl.setValue(mapping.newWardID || '')
+            this.newWardControl.setValue(mapping.newWardName || '')
             console.log(this.newWardControl.value);
         }
-    }
-
-    onOldWardCleared(): void {
-        this.oldWardControl.setValue('');
-        this.newWardControl.setValue('');
-        this.listNewWard = [];
     }
 
     onNewProvinceChange(newProvinceID: string) {
@@ -193,13 +166,6 @@ export class AddressMappingComponent implements OnInit {
         );
     }
 
-    onNewProvinceCleared(): void {
-        this.newProvinceControl.setValue('');
-        this.newWardControl.setValue('');
-        this.listNewWard = [];
-    }
-
-
     onNewWardChange(newWardID: string) {
         // Tìm thông tin phường/xã mới được chọn
         const mapping = this.newWards.find(nw => nw.newWardID === newWardID);
@@ -235,8 +201,8 @@ export class AddressMappingComponent implements OnInit {
             // 🔁 Tìm tỉnh chứa huyện này
             const district = this.oldDistricts.find(d => d.oldDistrictID === this.oldDistrictControl.value);
             if (district) {
-                const provinceID = district.oldProvinceID;
-                this.oldProvinceControl.setValue(provinceID || '')
+                const provinceName = district.oldDistrictName;
+                this.oldProvinceControl.setValue(provinceName || '')
             }
         } else {
             // Nếu nhiều huyện → cho người dùng chọn từ danh sách huyện có liên quan
@@ -247,6 +213,43 @@ export class AddressMappingComponent implements OnInit {
             // Xóa danh sách xã → chờ người dùng chọn huyện
             this.listOldWard = [];
         }
+    }
+
+    onOldProvinceCleared(): void {
+        this.oldProvinceControl.setValue('');
+        this.oldDistrictControl.setValue('');
+        this.oldWardControl.setValue('');
+
+        this.listOldDistrict = [];
+        this.listOldWard = [];
+        this.newProvinceControl.setValue('');
+        this.newWardControl.setValue('');
+        this.listNewWard = [];
+    }
+
+    onOldDistrictCleared(): void {
+        this.oldDistrictControl.setValue('');
+        this.oldWardControl.setValue('');
+        this.listOldWard = [];
+        this.newWardControl.setValue('');
+        this.listNewWard = [];
+    }
+
+    onOldWardCleared(): void {
+        this.oldWardControl.setValue('');
+        this.newWardControl.setValue('');
+        this.listNewWard = [];
+    }
+
+    onNewProvinceCleared(): void {
+        this.newProvinceControl.setValue('');
+        this.newWardControl.setValue('');
+
+        this.oldProvinceControl.setValue('');
+        this.oldDistrictControl.setValue('');
+        this.oldWardControl.setValue('');
+
+        this.listNewWard = [];
     }
 
     onNewWardCleared(): void {
