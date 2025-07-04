@@ -1,0 +1,15 @@
+.old-address-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.address-field {
+    width: 100%;
+}
+
+button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

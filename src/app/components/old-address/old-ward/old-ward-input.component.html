@@ -1,0 +1,19 @@
+<!-- /src/app/components/old-address/old-province/old-province-input.component.html -->
+<mat-form-field class="w-full" appearance="outline" class="address-field">
+    <mat-label>Phường/ Xã (cũ)</mat-label>
+    <input type="text" placeholder="Chọn Phường/ Xã " aria-label="Phường/ Xã" matInput [formControl]="wardsControl"
+        [matAutocomplete]="auto" />
+    @if(wardsControl.value){
+    <button mat-icon-button matSuffix aria-label="Clear" (click)="clearSelection()">
+        <mat-icon>close</mat-icon>
+    </button>
+    }
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event.option.value)"
+        [displayWith]="displayFn">
+        @for (district of filteredWards; track district.oldWardID) {
+        <mat-option [value]="district">
+            {{ district.oldWardName }}
+        </mat-option>
+        }
+    </mat-autocomplete>
+</mat-form-field>

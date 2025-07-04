@@ -8,7 +8,8 @@
       "node"
     ]
   },
-  "include": [
+  "include"
+  : [
     "src/**/*.ts"
   ],
   "exclude": [

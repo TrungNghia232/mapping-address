@@ -4,15 +4,29 @@ import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input'
 import { NewProvinceAddress, NewWardAddress, OldDistrictAddress, OldProvinceAddress, OldWardAddress } from '../../models/address.model';
 import { AddressService } from '../../services/address.service';
+import { map, Observable, startWith } from 'rxjs';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { OldAddressInputComponent } from '../old-address/old-address-input.component';
 
 @Component({
     selector: 'app-address-mapping',
     standalone: true,
     templateUrl: './address-mapping.component.html',
     styleUrls: ['./address-mapping.component.css'],
-    imports: [MatFormFieldModule, MatSelectModule, MatOptionModule, MatCardModule],
+    imports: [
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatCardModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        OldAddressInputComponent
+    ],
 })
 export class AddressMappingComponent implements OnInit {
     newProvince: NewProvinceAddress[] = [];
@@ -25,15 +39,20 @@ export class AddressMappingComponent implements OnInit {
     selectedNewProvinceID: string = '';
     selectedNewWardID: string = '';
 
-    selectedOldProvinceID: string = '';
-    selectedOldDistrictID: string = '';
-
     listOldProvince: OldProvinceAddress[] = [];
     listOldDistrict: OldDistrictAddress[] = [];
     listOldWard: OldWardAddress[] = [];
 
     listNewProvince: NewProvinceAddress[] = [];
     listNewWard: NewWardAddress[] = [];
+
+    // Form Controls for Autocomplete inputs
+    oldProvinceControl = new FormControl('');
+    oldDistrictControl = new FormControl('');
+    oldWardControl = new FormControl('');
+
+    // Danh sách tìm kiếm
+    filteredOldProvinces!: Observable<OldProvinceAddress[]>;
 
     constructor(private addressService: AddressService) { }
 
@@ -58,6 +77,7 @@ export class AddressMappingComponent implements OnInit {
     }
 
     onOldProvinceChange(oldProvinceID: string) {
+        this.oldProvinceControl.setValue(oldProvinceID);
         const mapping = this.newProvince.find(np =>
             np.mergeProvince.includes(oldProvinceID)
         );
@@ -74,8 +94,12 @@ export class AddressMappingComponent implements OnInit {
                     filter(a => a.oldProvinceID === oldProvinceID)
             )
         ];
+        console.log("listOldDistrict", this.listOldDistrict);
+        // Clear formControl huyện cũ
+        this.oldDistrictControl.setValue('');
         this.listOldWard = [];
 
+        this.oldDistrictControl.setValue('');
         this.selectedNewWardID = '';
         this.listNewWard = [
             ...new Set(
@@ -85,9 +109,32 @@ export class AddressMappingComponent implements OnInit {
         ];
     }
 
+    onOldProvinceCleared(): void {
+        this.oldProvinceControl.setValue('');
+        this.oldDistrictControl.setValue('');
+        this.oldWardControl.setValue('');
+
+        this.listOldDistrict = [];
+        this.listOldWard = [];
+        this.selectedNewProvinceID = '';
+        this.selectedNewWardID = '';
+        this.listNewWard = [];
+    }
+
     onOldDistrictChange(oldDistrictID: string) {
+        this.oldDistrictControl.setValue(oldDistrictID);
+        console.log("oldDistrictID", oldDistrictID);
         this.listOldWard = this.oldWards
             .filter(a => a.oldDistrictID === oldDistrictID)
+        console.log("listOldWard", this.listOldWard);
+    }
+
+    onOldDistrictCleared(): void {
+        this.oldDistrictControl.setValue('');
+        this.oldWardControl.setValue('');
+        this.listOldWard = [];
+        this.selectedNewWardID = '';
+        this.listNewWard = [];
     }
 
     onOldWardChange(ward: string) {
@@ -103,6 +150,12 @@ export class AddressMappingComponent implements OnInit {
         }
     }
 
+    onOldWardCleared(): void {
+        this.oldWardControl.setValue('');
+        this.selectedNewWardID = '';
+        this.listNewWard = [];
+    }
+
     onNewProvinceChange(newProvinceID: string) {
         // Tìm tỉnh mới được chọn
         const mapping = this.newProvince.find(p => p.newProvinceID === newProvinceID);
@@ -116,11 +169,11 @@ export class AddressMappingComponent implements OnInit {
 
             // ✅ Nếu chỉ có 1 tỉnh cũ → chọn luôn
             if (mergedOldProvinces.length === 1) {
-                this.selectedOldProvinceID = mergedOldProvinces[0].oldProvinceID;
+                this.oldProvinceControl.setValue(mergedOldProvinces[0].oldProvinceID);
 
                 // Lọc huyện cũ theo tỉnh cũ đó
                 this.listOldDistrict = this.oldDistricts.filter(d =>
-                    d.oldProvinceID ===  this.selectedOldProvinceID
+                    d.oldProvinceID === this.oldProvinceControl.value
                 );
 
             } else {
@@ -168,16 +221,16 @@ export class AddressMappingComponent implements OnInit {
 
         if (districtIDs.length === 1) {
             // Nếu chỉ có 1 huyện → chọn luôn
-            this.selectedOldDistrictID = districtIDs[0];
-            this.listOldDistrict = this.oldDistricts.filter(d => d.oldDistrictID === this.selectedOldDistrictID);
+            this.oldDistrictControl.setValue(districtIDs[0]);
+            this.listOldDistrict = this.oldDistricts.filter(d => d.oldDistrictID === this.oldDistrictControl.value);
 
             this.listOldWard = mergedOldWards;
 
             // 🔁 Tìm tỉnh chứa huyện này
-            const district = this.oldDistricts.find(d => d.oldDistrictID === this.selectedOldDistrictID);
+            const district = this.oldDistricts.find(d => d.oldDistrictID === this.oldDistrictControl.value);
             if (district) {
                 const provinceID = district.oldProvinceID;
-                this.selectedOldProvinceID = provinceID || '';
+                this.oldProvinceControl.setValue(provinceID || '')
             }
         } else {
             // Nếu nhiều huyện → cho người dùng chọn từ danh sách huyện có liên quan
@@ -189,5 +242,4 @@ export class AddressMappingComponent implements OnInit {
             this.listOldWard = [];
         }
     }
-
 }

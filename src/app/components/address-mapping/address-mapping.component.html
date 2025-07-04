@@ -1,55 +1,50 @@
-<!-- src/app/components/address-mapping/address-mapping.component.html -->
-<div class="address-mapping">
-  <!-- Địa chỉ cũ -->
-  <div class="old-address">
-    <h3>Địa chỉ cũ</h3>
-    <mat-form-field appearance="fill">
-      <mat-label>Tỉnh</mat-label>
-      <mat-select [value]="selectedOldProvinceID" (selectionChange)="onOldProvinceChange($event.value)">
-        @for (p of listOldProvince; track p.oldProvinceID) {
-        <mat-option [value]="p.oldProvinceID">{{ p.oldProvinceName }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+<!-- //src/app/components/address-mapping/address-mapping.component.html -->
+<div class="container">
+  <!-- src/app/components/address-mapping/address-mapping.component.html -->
+  <div class="address-mapping">
+    <!-- Địa chỉ cũ -->
+    <div class="old-address">
+      <h3>Địa chỉ cũ</h3>
+      <app-old-address-input
+        [provinces]="listOldProvince"
+        [provincesControl]="oldProvinceControl"
+        (provinceCleared)="onOldProvinceCleared()"
+        (provinceSelected)="onOldProvinceChange($event.oldProvinceID)"
+          
+        [districts]="listOldDistrict"
+        [districtsControl]="oldDistrictControl"
+        (districtCleared)="onOldDistrictCleared()"
+        (districtSelected)="onOldDistrictChange($event.oldDistrictID)"
 
-    <mat-form-field appearance="fill">
-      <mat-label>Quận/Huyện</mat-label>
-      <mat-select [value]="selectedOldDistrictID" (selectionChange)="onOldDistrictChange($event.value)">
-        @for (d of listOldDistrict; track d.oldDistrictID) {
-        <mat-option [value]="d.oldDistrictID">{{ d.oldDistrictName }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+        [wards]="listOldWard"
+        [wardsControl]="oldWardControl"
+        (wardCleared)="onOldWardCleared()"
+        (wardSelected)="onOldWardChange($event.oldWardID)"
+    ></app-old-address-input>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Phường/Xã</mat-label>
-      <mat-select (selectionChange)="onOldWardChange($event.value)">
-        @for (w of listOldWard; track w.oldWardID) {
-        <mat-option [value]="w.oldWardID">{{ w.oldWardName }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+
+    <!-- Địa chỉ mới -->
+    <div class="new-address">
+      <h3>Địa chỉ mới</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>Tỉnh</mat-label>
+        <mat-select [value]="selectedNewProvinceID" (selectionChange)="onNewProvinceChange($event.value)">
+          @for (p of listNewProvince; track p.newProvinceID) {
+          <mat-option [value]="p.newProvinceID">{{ p.newProvinceName }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Phường/Xã</mat-label>
+        <mat-select [value]="selectedNewWardID" (selectionChange)="onNewWardChange($event.value)">
+          @for (w of listNewWard; track w.newWardID) {
+          <mat-option [value]="w.newWardID">{{ w.newWardName }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
   </div>
-
-  <!-- Địa chỉ mới -->
-  <div class="new-address">
-    <h3>Địa chỉ mới</h3>
-    <mat-form-field appearance="fill">
-      <mat-label>Tỉnh</mat-label>
-      <mat-select [value]="selectedNewProvinceID" (selectionChange)="onNewProvinceChange($event.value)">
-        @for (p of listNewProvince; track p.newProvinceID) {
-        <mat-option [value]="p.newProvinceID">{{ p.newProvinceName }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Phường/Xã</mat-label>
-      <mat-select [value]="selectedNewWardID" (selectionChange)="onNewWardChange($event.value)">
-        @for (w of listNewWard; track w.newWardID) {
-        <mat-option [value]="w.newWardID">{{ w.newWardName }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-
 </div>

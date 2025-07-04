@@ -1,0 +1,34 @@
+<!-- /src/app/components/old-address/old-province/old-province-input.component.html -->
+<mat-form-field class="w-full" appearance="outline" class="address-field">
+    <mat-label>Tỉnh (cũ)</mat-label>
+    <input 
+        type="text" 
+        placeholder="Chọn Tỉnh"
+        aria-label="Tỉnh"
+        matInput 
+        [formControl]="provinceControl" 
+        [matAutocomplete]="auto" 
+    />
+     <!-- Nút clear -->
+    @if(provinceControl.value){
+        <button 
+            mat-icon-button 
+            matSuffix 
+            aria-label="Clear"
+            (click)="clearSelection()"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    }
+    <mat-autocomplete 
+        #auto="matAutocomplete" 
+        (optionSelected)="onSelected($event.option.value)"
+        [displayWith]="displayFn"
+    >
+        @for (province of filteredProvinces; track province.oldProvinceID) {
+            <mat-option  [value]="province">
+                {{ province.oldProvinceName }}
+            </mat-option>
+        }
+    </mat-autocomplete>
+</mat-form-field>
