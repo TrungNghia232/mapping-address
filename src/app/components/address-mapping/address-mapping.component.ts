@@ -1,16 +1,17 @@
 // src/app/components/address-mapping/address-mapping.component.ts
 import { Component, OnInit } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input'
-import { NewProvinceAddress, NewWardAddress, OldDistrictAddress, OldProvinceAddress, OldWardAddress } from '../../models/address.model';
-import { AddressService } from '../../services/address.service';
-import { map, Observable, startWith } from 'rxjs';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { OldAddressInputComponent } from '../old-address/old-address-input.component';
+import { NewProvinceAddress, NewWardAddress, OldDistrictAddress, OldProvinceAddress, OldWardAddress } from '@models/address.model';
+import { AddressService } from '@services/address.service';
+import { Observable } from 'rxjs';
+import { OldAddressInputComponent } from './old-address/old-address-input.component';
+import { NewAddressInputComponent } from './new-address/new-address-input.component';
 
 @Component({
     selector: 'app-address-mapping',
@@ -25,7 +26,8 @@ import { OldAddressInputComponent } from '../old-address/old-address-input.compo
         MatCardModule,
         MatAutocompleteModule,
         MatInputModule,
-        OldAddressInputComponent
+        OldAddressInputComponent,
+        NewAddressInputComponent
     ],
 })
 export class AddressMappingComponent implements OnInit {
@@ -35,9 +37,6 @@ export class AddressMappingComponent implements OnInit {
     oldProvince: OldProvinceAddress[] = [];
     oldDistricts: OldDistrictAddress[] = [];
     oldWards: OldWardAddress[] = [];
-
-    selectedNewProvinceID: string = '';
-    selectedNewWardID: string = '';
 
     listOldProvince: OldProvinceAddress[] = [];
     listOldDistrict: OldDistrictAddress[] = [];
@@ -51,8 +50,9 @@ export class AddressMappingComponent implements OnInit {
     oldDistrictControl = new FormControl('');
     oldWardControl = new FormControl('');
 
-    // Danh sách tìm kiếm
-    filteredOldProvinces!: Observable<OldProvinceAddress[]>;
+    newProvinceControl = new FormControl('');
+    newWardControl = new FormControl('');
+
 
     constructor(private addressService: AddressService) { }
 
@@ -85,8 +85,8 @@ export class AddressMappingComponent implements OnInit {
         console.log("mapping", mapping);
 
         if (mapping) {
-            this.selectedNewProvinceID = mapping.newProvinceID || '';
-            console.log("selectedNewProvinceID", this.selectedNewProvinceID);
+            this.newProvinceControl.setValue(mapping.newProvinceID)
+            console.log("selectedNewProvinceID", this.newProvinceControl.value);
         }
         this.listOldDistrict = [
             ...new Set(
@@ -100,11 +100,11 @@ export class AddressMappingComponent implements OnInit {
         this.listOldWard = [];
 
         this.oldDistrictControl.setValue('');
-        this.selectedNewWardID = '';
+        this.newProvinceControl.setValue('');
         this.listNewWard = [
             ...new Set(
                 this.newWards.
-                    filter(a => a.newProvinceID === this.selectedNewProvinceID)
+                    filter(a => a.newProvinceID === this.newProvinceControl.value)
             )
         ];
     }
@@ -116,8 +116,8 @@ export class AddressMappingComponent implements OnInit {
 
         this.listOldDistrict = [];
         this.listOldWard = [];
-        this.selectedNewProvinceID = '';
-        this.selectedNewWardID = '';
+        this.newProvinceControl.setValue('');
+        this.newWardControl.setValue('');
         this.listNewWard = [];
     }
 
@@ -133,7 +133,7 @@ export class AddressMappingComponent implements OnInit {
         this.oldDistrictControl.setValue('');
         this.oldWardControl.setValue('');
         this.listOldWard = [];
-        this.selectedNewWardID = '';
+        this.newWardControl.setValue('');
         this.listNewWard = [];
     }
 
@@ -145,14 +145,14 @@ export class AddressMappingComponent implements OnInit {
         console.log("mapping", mapping);
 
         if (mapping) {
-            this.selectedNewWardID = mapping.newWardID || '';
-            console.log(this.selectedNewWardID);
+            this.newWardControl.setValue(mapping.newWardID || '')
+            console.log(this.newWardControl.value);
         }
     }
 
     onOldWardCleared(): void {
         this.oldWardControl.setValue('');
-        this.selectedNewWardID = '';
+        this.newWardControl.setValue('');
         this.listNewWard = [];
     }
 
@@ -191,6 +191,12 @@ export class AddressMappingComponent implements OnInit {
         this.listNewWard = this.newWards.filter(w =>
             w.newProvinceID === newProvinceID
         );
+    }
+
+    onNewProvinceCleared(): void {
+        this.newProvinceControl.setValue('');
+        this.newWardControl.setValue('');
+        this.listNewWard = [];
     }
 
 
@@ -241,5 +247,10 @@ export class AddressMappingComponent implements OnInit {
             // Xóa danh sách xã → chờ người dùng chọn huyện
             this.listOldWard = [];
         }
+    }
+
+    onNewWardCleared(): void {
+        this.newWardControl.setValue('');
+        this.listOldWard = [];
     }
 }

@@ -1,0 +1,15 @@
+<div class="new-address-input">
+  <app-new-province-input
+    [provinces]="provinces"
+    [provinceControl]="provinceControl"
+    (provinceSelected)="onProvinceSelected($event)"
+    (provinceCleared)="provinceCleared.emit()"
+  ></app-new-province-input>
+
+  <!-- <app-new-ward-select
+    [wards]="listNewWard"
+    [control]="newWardControl"
+    (wardSelected)="onNewWardChange($event)"
+    (wardCleared)="onNewWardCleared()"
+  ></app-new-ward-select> -->
+</div>

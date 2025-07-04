@@ -38,6 +38,22 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
+.old-address-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.address-field {
+    width: 100%;
+}
+
+button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}F
+
 mat-form-field {
   display      : block;
   width        : 100%;

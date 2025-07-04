@@ -1,9 +1,9 @@
 <!-- /src/app/components/old-address/old-province/old-province-input.component.html -->
 <mat-form-field class="w-full" appearance="outline" class="address-field">
     <mat-label>Huyện (cũ)</mat-label>
-    <input type="text" placeholder="Chọn Huyện" aria-label="Huyện" matInput [formControl]="districtsControl"
+    <input type="text" placeholder="Chọn Huyện" aria-label="Huyện" matInput [formControl]="districtControl"
         [matAutocomplete]="auto" />
-    @if(districtsControl.value){
+    @if(districtControl.value){
     <button mat-icon-button matSuffix aria-label="Clear" (click)="clearSelection()">
         <mat-icon>close</mat-icon>
     </button>

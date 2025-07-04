@@ -2,28 +2,26 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { OldProvinceAddress } from '../../../models/address.model';
-import { MATERIAL_AUTOCOMPLETE_IMPORTS } from '../../../shared/material/autocomplete';
-
+import { OldProvinceAddress } from '@models/address.model';
+import { MATERIAL_AUTOCOMPLETE_IMPORTS } from '@shared/material/autocomplete';
 
 @Component({
   selector: 'app-old-province-input',
   templateUrl: './old-province-input.component.html',
   styleUrls: [
     './old-province-input.component.css',
-    '../old-address-input.component.css'
+    '../old-address-input.component.css',
+    '../../address-mapping.component.css',
   ],
   imports: [...MATERIAL_AUTOCOMPLETE_IMPORTS],
 })
 export class OldProvinceAutocompleteComponent implements OnInit {
   @Input() provinces: OldProvinceAddress[] = [];
-  @Input() provincesControl!: FormControl
+  @Input() provinceControl!: FormControl
 
   @Output() provinceSelected = new EventEmitter<OldProvinceAddress>();
   @Output() clearClicked = new EventEmitter<void>();
 
-  provinceControl = new FormControl<string | OldProvinceAddress>('');
   filteredProvinces: OldProvinceAddress[] = [];
 
   ngOnInit(): void {

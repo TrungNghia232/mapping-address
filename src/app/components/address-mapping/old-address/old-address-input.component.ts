@@ -1,7 +1,7 @@
 // src/app/components/old-address/old-address-input.component.ts
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OldProvinceAddress, OldDistrictAddress, OldWardAddress } from '../../models/address.model';
+import { OldProvinceAddress, OldDistrictAddress, OldWardAddress } from '@models/address.model';
 import { OldProvinceAutocompleteComponent } from './old-province/old-province-input.component';
 import { OldDistrictAutocompleteComponent } from './old-district/old-district-input.component';
 import { FormControl } from '@angular/forms';
@@ -21,13 +21,13 @@ import { OldWardAutocompleteComponent } from './old-ward/old-ward-input.componen
 })
 export class OldAddressInputComponent {
   @Input() provinces: OldProvinceAddress[] = [];
-  @Input() provincesControl!: FormControl;
+  @Input() provinceControl!: FormControl;
 
   @Input() districts: OldDistrictAddress[] = [];
-  @Input() districtsControl!: FormControl;
+  @Input() districtControl!: FormControl;
 
   @Input() wards: OldWardAddress[] = [];
-  @Input() wardsControl!: FormControl;
+  @Input() wardControl!: FormControl;
 
   @Output() provinceSelected = new EventEmitter<OldProvinceAddress>();
   @Output() provinceCleared = new EventEmitter<void>();

@@ -2,9 +2,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
-import { OldDistrictAddress } from '../../../models/address.model';
-import { MATERIAL_AUTOCOMPLETE_IMPORTS } from '../../../shared/material/autocomplete';
-
+import { OldDistrictAddress } from '@models/address.model';
+import { MATERIAL_AUTOCOMPLETE_IMPORTS } from '@shared/material/autocomplete';
 
 @Component({
     selector: 'app-old-district-input',
@@ -12,13 +11,14 @@ import { MATERIAL_AUTOCOMPLETE_IMPORTS } from '../../../shared/material/autocomp
     templateUrl: './old-district-input.component.html',
     styleUrls: [
         './old-district-input.component.css',
-        '../old-address-input.component.css'
+        '../old-address-input.component.css',
+        '../../address-mapping.component.css',
     ],
     imports: [...MATERIAL_AUTOCOMPLETE_IMPORTS],
 })
 export class OldDistrictAutocompleteComponent implements OnInit {
     @Input() districts: OldDistrictAddress[] = [];
-    @Input() districtsControl!: FormControl
+    @Input() districtControl!: FormControl
 
     @Output() districtSelected = new EventEmitter<OldDistrictAddress>();
     @Output() clearClicked = new EventEmitter<void>();
@@ -26,7 +26,7 @@ export class OldDistrictAutocompleteComponent implements OnInit {
     filteredDistricts: OldDistrictAddress[] = [];
 
     ngOnInit(): void {
-        this.districtsControl.valueChanges
+        this.districtControl.valueChanges
             .pipe(
                 startWith(''),
                 debounceTime(200),
@@ -44,7 +44,7 @@ export class OldDistrictAutocompleteComponent implements OnInit {
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['districts']) {
             // Nếu chưa có gì nhập thì hiển thị toàn bộ danh sách huyện
-            const controlValue = this.districtsControl.value;
+            const controlValue = this.districtControl.value;
             const keyword = typeof controlValue === 'string' ? controlValue : controlValue?.oldDistrictName ?? '';
             this.filteredDistricts = this._filterDistricts(keyword);
         }
@@ -60,11 +60,11 @@ export class OldDistrictAutocompleteComponent implements OnInit {
 
     onSelected(district: OldDistrictAddress): void {
         this.districtSelected.emit(district);
-        this.districtsControl.setValue(district.oldDistrictName, { emitEvent: false }); // emitEvent: false to prevent re-triggering valueChanges immediately
+        this.districtControl.setValue(district.oldDistrictName, { emitEvent: false }); // emitEvent: false to prevent re-triggering valueChanges immediately
     }
 
     clearSelection(): void {
-        this.districtsControl.setValue('');
+        this.districtControl.setValue('');
         this.clearClicked.emit(); // 🔥 báo cho component cha biết
     }
 }

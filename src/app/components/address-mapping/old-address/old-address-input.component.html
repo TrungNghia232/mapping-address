@@ -1,0 +1,23 @@
+<!-- // src/app/components/old-address/old-address-input.component.html -->
+<div class="old-address-input">
+  <app-old-province-input 
+    [provinces]="provinces" 
+    (provinceSelected)="onProvinceSelected($event)"
+    [provinceControl]="provinceControl" 
+    (clearClicked)="provinceCleared.emit()">
+  </app-old-province-input>
+
+  <app-old-district-input 
+    [districts]="districts" 
+    (districtSelected)="onDistrictSelected($event)"
+    [districtControl]="districtControl" 
+    (clearClicked)="districtCleared.emit()">
+  </app-old-district-input>
+
+  <app-old-ward-input 
+    [wards]="wards" 
+    (wardSelected)="onWardSelected($event)"
+    [wardControl]="wardControl" 
+    (clearClicked)="wardSelected.emit()">
+  </app-old-ward-input>
+</div>

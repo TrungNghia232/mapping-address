@@ -7,17 +7,17 @@
       <h3>Địa chỉ cũ</h3>
       <app-old-address-input
         [provinces]="listOldProvince"
-        [provincesControl]="oldProvinceControl"
+        [provinceControl]="oldProvinceControl"
         (provinceCleared)="onOldProvinceCleared()"
         (provinceSelected)="onOldProvinceChange($event.oldProvinceID)"
           
         [districts]="listOldDistrict"
-        [districtsControl]="oldDistrictControl"
+        [districtControl]="oldDistrictControl"
         (districtCleared)="onOldDistrictCleared()"
         (districtSelected)="onOldDistrictChange($event.oldDistrictID)"
 
         [wards]="listOldWard"
-        [wardsControl]="oldWardControl"
+        [wardControl]="oldWardControl"
         (wardCleared)="onOldWardCleared()"
         (wardSelected)="onOldWardChange($event.oldWardID)"
     ></app-old-address-input>
@@ -26,23 +26,17 @@
     <!-- Địa chỉ mới -->
     <div class="new-address">
       <h3>Địa chỉ mới</h3>
-      <mat-form-field appearance="fill">
-        <mat-label>Tỉnh</mat-label>
-        <mat-select [value]="selectedNewProvinceID" (selectionChange)="onNewProvinceChange($event.value)">
-          @for (p of listNewProvince; track p.newProvinceID) {
-          <mat-option [value]="p.newProvinceID">{{ p.newProvinceName }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Phường/Xã</mat-label>
-        <mat-select [value]="selectedNewWardID" (selectionChange)="onNewWardChange($event.value)">
-          @for (w of listNewWard; track w.newWardID) {
-          <mat-option [value]="w.newWardID">{{ w.newWardName }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+      <app-new-address-input
+        [provinces]="listNewProvince"
+        [provinceControl]="newProvinceControl"
+        (provinceCleared)="onNewProvinceCleared()"
+        (provinceSelected)="onNewProvinceChange($event.newProvinceID)"
+          
+        [wards]="listNewWard"
+        [wardControl]="newWardControl"
+        (wardCleared)="onNewWardCleared()"
+        (wardSelected)="onNewWardChange($event.newWardID)"
+      ></app-new-address-input>
 
     </div>
 
