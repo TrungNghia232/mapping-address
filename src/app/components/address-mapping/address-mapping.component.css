@@ -10,7 +10,7 @@
   width: 50%;
   margin: auto;
   padding         : 24px;
-  background-color: #f5f7fa;
+  background-color: #7d93b3;
   text-align      : center;
   border-radius   : 12px;
   box-shadow      : 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -58,6 +58,9 @@ mat-form-field {
   display      : block;
   width        : 100%;
   margin-bottom: 16px;
+}
+mat-option {
+  background-color: white !important; ;
 }
 
 h3 {

@@ -1,5 +1,5 @@
 // src/app/components/old-address/old-province/old-province-input.component.ts
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { OldProvinceAddress } from '@models/address.model';
@@ -40,6 +40,12 @@ export class OldProvinceAutocompleteComponent implements OnInit {
       });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['provinces']) {
+      const currentFilter = typeof this.provinceControl.value === 'string' ? this.provinceControl.value : '';
+      this.filteredProvinces = this._filterProvinces(currentFilter);
+    }
+  }
 
   displayFn = (province: OldProvinceAddress | string): string =>
     typeof province === 'string' ? province : province?.oldProvinceName;

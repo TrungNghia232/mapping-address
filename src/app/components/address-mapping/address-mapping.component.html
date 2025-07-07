@@ -9,17 +9,17 @@
         [provinces]="listOldProvince"
         [provinceControl]="oldProvinceControl"
         (provinceCleared)="onOldProvinceCleared()"
-        (provinceSelected)="onOldProvinceChange($event.oldProvinceID)"
+        (provinceSelected)="onOldProvinceSelected($event)"
           
         [districts]="listOldDistrict"
         [districtControl]="oldDistrictControl"
         (districtCleared)="onOldDistrictCleared()"
-        (districtSelected)="onOldDistrictChange($event.oldDistrictID)"
+        (districtSelected)="onOldDistrictSelected($event)"
 
         [wards]="listOldWard"
         [wardControl]="oldWardControl"
         (wardCleared)="onOldWardCleared()"
-        (wardSelected)="onOldWardChange($event.oldWardID)"
+        (wardSelected)="onOldWardSelected($event)"
     ></app-old-address-input>
 
 
@@ -30,12 +30,12 @@
         [provinces]="listNewProvince"
         [provinceControl]="newProvinceControl"
         (provinceCleared)="onNewProvinceCleared()"
-        (provinceSelected)="onNewProvinceChange($event.newProvinceID)"
+        (provinceSelected)="onNewProvinceSelected($event)"
           
         [wards]="listNewWard"
         [wardControl]="newWardControl"
         (wardCleared)="onNewWardCleared()"
-        (wardSelected)="onNewWardChange($event.newWardID)"
+        (wardSelected)="onNewWardSelected($event)"
       ></app-new-address-input>
 
     </div>
