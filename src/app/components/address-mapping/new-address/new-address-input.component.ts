@@ -20,10 +20,10 @@ import { NewWardAutocompleteComponent } from './new-ward/new-ward-input.componen
 })
 export class NewAddressInputComponent {
   @Input() provinces: NewProvinceAddress[] = [];
-  @Input() provinceControl!: FormControl;
+  @Input() provinceControl!: FormControl<NewProvinceAddress | null>;
 
   @Input() wards: NewWardAddress[] = [];
-  @Input() wardControl!: FormControl;
+  @Input() wardControl!: FormControl<NewWardAddress | null>;
 
   @Output() provinceSelected = new EventEmitter<NewProvinceAddress>();
   @Output() provinceCleared = new EventEmitter<void>();

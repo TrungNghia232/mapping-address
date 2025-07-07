@@ -2,13 +2,14 @@
   display        : flex;
   justify-content: center;
   align-items    : center;
-  min-height     : 100vh; /* toàn màn hình dọc */
+  min-height     : 100vh;
+  /* toàn màn hình dọc */
 }
 
 .address-mapping {
-  min-width: 180px;
-  width: 50%;
-  margin: auto;
+  min-width       : 180px;
+  width           : 50%;
+  margin          : auto;
   padding         : 24px;
   background-color: #7d93b3;
   text-align      : center;
@@ -17,13 +18,8 @@
   animation       : fadeIn 0.4s ease-in-out;
 }
 
-.old-address {
-  margin-bottom: 30px;
-}
-
 .old-address,
 .new-address {
-  flex            : 1 1 300px;
   min-width       : 300px;
   padding         : 16px;
   background-color: white;
@@ -39,35 +35,153 @@
 }
 
 .old-address-input {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display       : flex;
+  flex-direction: column;
+  gap           : 10px;
 }
 
 .address-field {
-    width: 100%;
+  width: 100%;
 }
 
-button{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}F
+button {
+  background-color: transparent;
+  border          : none;
+  cursor          : pointer;
+}
 
-mat-form-field {
+F mat-form-field {
   display      : block;
   width        : 100%;
   margin-bottom: 16px;
 }
+
 mat-option {
-  background-color: white !important; ;
+  background-color: white !important;
+  ;
 }
 
-h3 {
-  margin-top : 0;
-  font-size  : 20px;
-  font-weight: 600;
-  color      : #333;
+/* src/app/components/address-mapping/address-mapping.component.css */
+.container {
+  max-width: 1200px;
+  margin   : 0 auto;
+  padding  : 20px;
+}
+
+.address-mapping {
+  display       : flex;
+  flex-direction: column;
+  gap           : 30px;
+}
+
+.address-mode-selector {
+  background-color: #f5f5f5;
+  padding         : 20px;
+  border-radius   : 8px;
+  border          : 1px solid #ddd;
+}
+
+.address-mode-selector h3 {
+  margin-top   : 0;
+  margin-bottom: 15px;
+  color        : #333;
+}
+
+.address-mode-selector mat-radio-group {
+  display: flex;
+  gap    : 20px;
+}
+
+.address-mode-selector mat-radio-button {
+  font-size: 16px;
+}
+
+.old-address,
+.new-address {
+  background-color: #fff;
+  padding         : 25px;
+  border-radius   : 8px;
+  border          : 1px solid #ddd;
+  box-shadow      : 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.old-address h3,
+.new-address h3 {
+  margin-top   : 0;
+  margin-bottom: 20px;
+  color        : #2c3e50;
+  font-size    : 18px;
+  font-weight  : 600;
+}
+
+.mapped-address {
+  background-color: #f8f9fa;
+  padding         : 20px;
+  border-radius   : 8px;
+  border          : 1px solid #e9ecef;
+  border-left     : 4px solid #007bff;
+}
+
+.mapped-address h3 {
+  margin-top   : 0;
+  margin-bottom: 15px;
+  color        : #495057;
+  font-size    : 16px;
+  font-weight  : 500;
+}
+
+.mapped-info p {
+  margin   : 8px 0;
+  color    : #6c757d;
+  font-size: 14px;
+}
+
+.mapped-info strong {
+  color: #495057;
+}
+
+.save-section {
+  text-align: center;
+  padding   : 20px 0;
+}
+
+.save-section button {
+  padding         : 12px 30px;
+  font-size       : 16px;
+  font-weight     : 700;
+  background-color: #fff;
+  border-radius   : 15px;
+  border          : none;
+  cursor          : pointer;
+  transition      : background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  box-shadow      : 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.save-section button:hover {
+  background-color: #7a828b;
+  color           : #fff;
+  transform       : scale(1.03);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .address-mode-selector mat-radio-group {
+    flex-direction: column;
+    gap           : 10px;
+  }
+
+  .old-address,
+  .new-address {
+    padding: 20px;
+  }
+
+  .mapped-address {
+    padding: 15px;
+  }
 }
 
 @keyframes fadeIn {

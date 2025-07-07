@@ -7,17 +7,21 @@
     (clearClicked)="provinceCleared.emit()">
   </app-old-province-input>
 
-  <app-old-district-input 
-    [districts]="districts" 
-    (districtSelected)="onDistrictSelected($event)"
-    [districtControl]="districtControl" 
-    (clearClicked)="districtCleared.emit()">
-  </app-old-district-input>
-
-  <app-old-ward-input 
-    [wards]="wards" 
-    (wardSelected)="onWardSelected($event)"
-    [wardControl]="wardControl" 
-    (clearClicked)="wardSelected.emit()">
-  </app-old-ward-input>
+  @if(provinceControl.value) {
+    <app-old-district-input 
+      [districts]="districts" 
+      (districtSelected)="onDistrictSelected($event)"
+      [districtControl]="districtControl" 
+      (clearClicked)="districtCleared.emit()">
+    </app-old-district-input>
+  }
+  
+  @if(districtControl.value) {
+    <app-old-ward-input 
+      [wards]="wards" 
+      (wardSelected)="onWardSelected($event)"
+      [wardControl]="wardControl" 
+      (clearClicked)="wardSelected.emit()">
+    </app-old-ward-input>
+  }
 </div>

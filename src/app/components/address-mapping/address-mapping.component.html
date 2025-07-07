@@ -1,43 +1,44 @@
 <!-- //src/app/components/address-mapping/address-mapping.component.html -->
 <div class="container">
-  <!-- src/app/components/address-mapping/address-mapping.component.html -->
   <div class="address-mapping">
+    <!-- Radio Button để chọn chế độ nhập địa chỉ -->
+    <div class="address-mode-selector">
+      <h3>Nhập thông tin địa chỉ</h3>
+      <mat-radio-group [formControl]="addressModeControl" (change)="onAddressModeChangeSafe($event.value)">
+        <mat-radio-button value="old">Nhập địa chỉ cũ</mat-radio-button>
+        <mat-radio-button value="new">Nhập địa chỉ mới</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
     <!-- Địa chỉ cũ -->
+    @if( addressModeControl.value == 'old' || addressModeControl.value == 'both') {
     <div class="old-address">
       <h3>Địa chỉ cũ</h3>
-      <app-old-address-input
-        [provinces]="listOldProvince"
-        [provinceControl]="oldProvinceControl"
-        (provinceCleared)="onOldProvinceCleared()"
-        (provinceSelected)="onOldProvinceSelected($event)"
-          
-        [districts]="listOldDistrict"
-        [districtControl]="oldDistrictControl"
-        (districtCleared)="onOldDistrictCleared()"
-        (districtSelected)="onOldDistrictSelected($event)"
+      <app-old-address-input [provinces]="listOldProvince" [provinceControl]="oldProvinceControl"
+        (provinceCleared)="onOldProvinceCleared()" (provinceSelected)="onOldProvinceSelected($event)"
+        [districts]="listOldDistrict" [districtControl]="oldDistrictControl" (districtCleared)="onOldDistrictCleared()"
+        (districtSelected)="onOldDistrictSelected($event)" [wards]="listOldWard" [wardControl]="oldWardControl"
+        (wardCleared)="onOldWardCleared()" (wardSelected)="onOldWardSelected($event)"></app-old-address-input>
 
-        [wards]="listOldWard"
-        [wardControl]="oldWardControl"
-        (wardCleared)="onOldWardCleared()"
-        (wardSelected)="onOldWardSelected($event)"
-    ></app-old-address-input>
-
+    </div>
+    }
 
     <!-- Địa chỉ mới -->
+    @if( addressModeControl.value == 'new' || addressModeControl.value == 'both') {
     <div class="new-address">
       <h3>Địa chỉ mới</h3>
-      <app-new-address-input
-        [provinces]="listNewProvince"
-        [provinceControl]="newProvinceControl"
-        (provinceCleared)="onNewProvinceCleared()"
-        (provinceSelected)="onNewProvinceSelected($event)"
-          
-        [wards]="listNewWard"
-        [wardControl]="newWardControl"
-        (wardCleared)="onNewWardCleared()"
-        (wardSelected)="onNewWardSelected($event)"
-      ></app-new-address-input>
+      <app-new-address-input [provinces]="listNewProvince" [provinceControl]="newProvinceControl"
+        (provinceCleared)="onNewProvinceCleared()" (provinceSelected)="onNewProvinceSelected($event)"
+        [wards]="listNewWard" [wardControl]="newWardControl" (wardCleared)="onNewWardCleared()"
+        (wardSelected)="onNewWardSelected($event)"></app-new-address-input>
+    </div>
+    }
 
+    <!-- Button Lưu -->
+    <div class="save-section">
+      <button mat-raised-button color="primary" (click)="onSaveAddress()">
+        Lưu
+      </button>
     </div>
 
   </div>

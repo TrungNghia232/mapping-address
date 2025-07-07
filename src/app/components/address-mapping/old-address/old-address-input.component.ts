@@ -21,13 +21,13 @@ import { OldWardAutocompleteComponent } from './old-ward/old-ward-input.componen
 })
 export class OldAddressInputComponent {
   @Input() provinces: OldProvinceAddress[] = [];
-  @Input() provinceControl!: FormControl;
+  @Input() provinceControl!: FormControl<OldProvinceAddress | null>;
 
   @Input() districts: OldDistrictAddress[] = [];
-  @Input() districtControl!: FormControl;
+  @Input() districtControl!: FormControl<OldDistrictAddress | null>;
 
   @Input() wards: OldWardAddress[] = [];
-  @Input() wardControl!: FormControl;
+  @Input() wardControl!: FormControl<OldWardAddress | null>;
 
   @Output() provinceSelected = new EventEmitter<OldProvinceAddress>();
   @Output() provinceCleared = new EventEmitter<void>();

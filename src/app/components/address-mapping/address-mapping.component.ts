@@ -7,10 +7,14 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
 import { NewProvinceAddress, NewWardAddress, OldDistrictAddress, OldProvinceAddress, OldWardAddress } from '@models/address.model';
 import { AddressService } from '@services/address.service';
 import { OldAddressInputComponent } from './old-address/old-address-input.component';
 import { NewAddressInputComponent } from './new-address/new-address-input.component';
+import { MatDialog } from '@angular/material/dialog';
+import { inject } from '@angular/core';
+import { AddressConfirmDialogComponent } from './address-confirm-dialog/addres-confirm-dialog.component';
 
 @Component({
     selector: 'app-address-mapping',
@@ -25,6 +29,7 @@ import { NewAddressInputComponent } from './new-address/new-address-input.compon
         MatCardModule,
         MatAutocompleteModule,
         MatInputModule,
+        MatRadioModule,
         OldAddressInputComponent,
         NewAddressInputComponent
     ],
@@ -44,42 +49,21 @@ export class AddressMappingComponent implements OnInit {
     listNewProvince: NewProvinceAddress[] = [];
     listNewWard: NewWardAddress[] = [];
 
-    // Default value 
-    oldProvinceDefautControl: OldProvinceAddress = {
-        oldProvinceID: '',
-        oldProvinceName: ''
-    }
-    oldDistrictDefautControl: OldDistrictAddress = {
-        oldDistrictID: '',
-        oldDistrictName: '',
-        oldProvinceID: ''
-    }
-    oldWardDefautControl: OldWardAddress = {
-        oldWardID: '',
-        oldWardName: '',
-        oldDistrictID: ''
-    }
-    newProvinceDefautControl: NewProvinceAddress = {
-        newProvinceID: '',
-        newProvinceName: '',
-        mergeProvince: []
-    }
-    newWardDefautControl: NewWardAddress = {
-        newWardID: '',
-        newWardName: '',
-        mergeWard: [],
-        newProvinceID: ''
-    }
     // Form Controls for Autocomplete inputs
-    oldProvinceControl = new FormControl<OldProvinceAddress>(this.oldProvinceDefautControl);
-    oldDistrictControl = new FormControl<OldDistrictAddress>(this.oldDistrictDefautControl);
-    oldWardControl = new FormControl<OldWardAddress>(this.oldWardDefautControl);
+    oldProvinceControl = new FormControl<OldProvinceAddress | null>(null);
+    oldDistrictControl = new FormControl<OldDistrictAddress | null>(null);
+    oldWardControl = new FormControl<OldWardAddress | null>(null);
 
-    newProvinceControl = new FormControl<NewProvinceAddress>(this.newProvinceDefautControl);
-    newWardControl = new FormControl<NewWardAddress>(this.newWardDefautControl);
+    newProvinceControl = new FormControl<NewProvinceAddress | null>(null);
+    newWardControl = new FormControl<NewWardAddress | null>(null);
 
+    // Radio button control
+    addressModeControl = new FormControl<string>('old');
 
-    constructor(private addressService: AddressService) { }
+    constructor(
+        private addressService: AddressService,
+        private dialog: MatDialog
+    ) { }
 
     ngOnInit(): void {
         this.addressService.getNewProvince().subscribe(data => {
@@ -101,17 +85,129 @@ export class AddressMappingComponent implements OnInit {
         });
     }
 
+
+    onAddressModeChange(mode: string): void {
+        this.addressModeControl.setValue(mode);
+        this.clearAllAddressData();
+    }
+    clearAllAddressData(): void {
+        // Clear old address data
+        this.oldProvinceControl.setValue(null);
+        this.oldDistrictControl.setValue(null);
+        this.oldWardControl.setValue(null);
+
+        // Clear new address data
+        this.newProvinceControl.setValue(null);
+        this.newWardControl.setValue(null);
+
+        // Reset lists
+        this.listOldProvince = this.oldProvince;
+        this.listOldDistrict = [];
+        this.listOldWard = [];
+        this.listNewProvince = this.newProvince;
+        this.listNewWard = [];
+    }
+
+    onSaveAddress(): void {
+        const addressMode = this.addressModeControl.value;
+
+        if (addressMode === 'new') {
+            // Nếu chọn nhập địa chỉ mới, hiện popup xác nhận
+            this.showSaveConfirmDialog();
+        } else {
+            // Nếu chọn nhập địa chỉ cũ, lưu trực tiếp
+            this.saveAddressData();
+        }
+    }
+
+    showSaveConfirmDialog(): void {
+        const dialogRef = this.dialog.open(AddressConfirmDialogComponent, {
+            width: '400px',
+            data: {
+                title: 'Xác nhận lưu địa chỉ',
+                message: 'Bạn có muốn lưu thông tin địa chỉ cũ không?'
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result === 'confirm') {
+                // Người dùng chọn có -> chuyển sang chế độ nhập địa chỉ cũ
+                this.addressModeControl.setValue('both');
+                this.saveAddressData();
+            } else if (result === 'save') {
+                // Người dùng chọn không -> lưu luôn
+                this.saveAddressData();
+            }
+            // Nếu result là undefined (đóng dialog) -> không làm gì cả
+        });
+    }
+
+    saveAddressData(): void {
+        const addressMode = this.addressModeControl.value;
+        const addressData = {
+            mode: addressMode,
+            oldAddress: {
+                province: this.oldProvinceControl.value,
+                district: this.oldDistrictControl.value,
+                ward: this.oldWardControl.value
+            },
+            newAddress: {
+                province: this.newProvinceControl.value,
+                ward: this.newWardControl.value
+            }
+        };
+
+        console.log('Saving address data:', addressData);
+
+        // TODO: Implement actual save logic here
+        // this.addressService.saveAddress(addressData).subscribe(...)
+
+        alert('Đã lưu thông tin địa chỉ thành công!');
+    }
+
+    onAddressModeChangeSafe(newMode: string): void {
+        const currentMode = this.addressModeControl.value;
+        console.log('currentMode', currentMode);
+        console.log('newMode', newMode);
+
+        const hasOldAddressData = !!this.oldProvinceControl.value;
+        const hasNewAddressData = !!this.newProvinceControl.value;
+
+        if (
+            (currentMode === 'old' && hasOldAddressData) ||
+            (currentMode === 'new' && hasNewAddressData) ||
+            (currentMode === 'both' && (hasOldAddressData || hasNewAddressData))
+        ) {
+            // Hiện popup cảnh báo
+            const dialogRef = this.dialog.open(AddressConfirmDialogComponent, {
+                width: '400px',
+                data: {
+                    title: 'Chuyển chế độ nhập',
+                    message: 'Thao tác này sẽ làm mất thông tin địa chỉ đã nhập. Bạn có chắc chắn muốn tiếp tục?'
+                }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+                if (result === 'confirm') {
+                    this.onAddressModeChange(newMode);
+                }
+                // Nếu là cancel thì không làm gì
+            });
+        } else {
+            this.onAddressModeChange(newMode);
+        }
+    }
+
+
     onOldProvinceSelected(selected: OldProvinceAddress) {
         this.oldProvinceControl.setValue(selected);
         const mapping = this.newProvince.find(np =>
             np.mergeProvince.includes(selected.oldProvinceID)
         );
-        console.log('oldProvinceID', selected.oldProvinceID);
         console.log("mapping", mapping);
 
         if (mapping) {
-            this.newProvinceControl.setValue(mapping || this.newProvinceDefautControl);
-            console.log("new province selected: ", this.newProvinceControl.value);
+            this.newProvinceControl.setValue(mapping || null);
         }
         this.listOldDistrict = [
             ...new Set(
@@ -119,19 +215,17 @@ export class AddressMappingComponent implements OnInit {
                     filter(a => a.oldProvinceID === selected.oldProvinceID)
             )
         ];
-        console.log("listOldDistrict", this.listOldDistrict);
         // Clear formControl huyện cũ
-        this.oldDistrictControl.setValue(this.oldDistrictDefautControl);
+        this.oldDistrictControl.setValue(null);
         this.listOldWard = [];
 
-        this.newWardControl.setValue(this.newWardDefautControl);
+        this.newWardControl.setValue(null);
         this.listNewWard = [
             ...new Set(
                 this.newWards.
                     filter(a => a.newProvinceID === mapping?.newProvinceID)
             )
         ];
-        console.log("listNewWard", this.listNewWard);
     }
 
     onOldDistrictSelected(selected: OldDistrictAddress) {
@@ -148,7 +242,7 @@ export class AddressMappingComponent implements OnInit {
         console.log("mapping", mapping);
 
         if (mapping) {
-            this.newWardControl.setValue(mapping || this.newWardDefautControl)
+            this.newWardControl.setValue(mapping || null)
             console.log(this.newWardControl.value);
         }
     }
@@ -228,7 +322,7 @@ export class AddressMappingComponent implements OnInit {
 
                 // 🔁 Tìm tỉnh chứa huyện này
                 const province = this.oldProvince.find(p => p.oldProvinceID === district.oldProvinceID);
-                this.oldProvinceControl.setValue(province || this.oldProvinceDefautControl)
+                this.oldProvinceControl.setValue(province || null)
             }
         } else {
             // Nếu nhiều huyện → cho người dùng chọn từ danh sách huyện có liên quan
@@ -243,41 +337,41 @@ export class AddressMappingComponent implements OnInit {
 
     onOldProvinceCleared(): void {
         // Xóa dữ liệu địa chỉ cũ
-        this.oldProvinceControl.setValue(this.oldProvinceDefautControl);
-        this.oldDistrictControl.setValue(this.oldDistrictDefautControl);
-        this.oldWardControl.setValue(this.oldWardDefautControl);
+        this.oldProvinceControl.setValue(null);
+        this.oldDistrictControl.setValue(null);
+        this.oldWardControl.setValue(null);
 
         this.listOldProvince = this.oldProvince;
         this.listOldDistrict = [];
         this.listOldWard = [];
 
         // Xóa dữ liệu địa chỉ mới
-        this.newProvinceControl.setValue(this.newProvinceDefautControl);
-        this.newWardControl.setValue(this.newWardDefautControl);
+        this.newProvinceControl.setValue(null);
+        this.newWardControl.setValue(null);
         this.listNewWard = [];
     }
 
     onOldDistrictCleared(): void {
-        this.oldDistrictControl.setValue(this.oldDistrictDefautControl);
-        this.oldWardControl.setValue(this.oldWardDefautControl);
+        this.oldDistrictControl.setValue(null);
+        this.oldWardControl.setValue(null);
         this.listOldWard = [];
 
-        this.newWardControl.setValue(this.newWardDefautControl);
+        this.newWardControl.setValue(null);
     }
 
     onOldWardCleared(): void {
-        this.oldWardControl.setValue(this.oldWardDefautControl);
-        this.newWardControl.setValue(this.newWardDefautControl);
+        this.oldWardControl.setValue(null);
+        this.newWardControl.setValue(null);
         this.listNewWard = [];
     }
 
     onNewProvinceCleared(): void {
-        this.newProvinceControl.setValue(this.newProvinceDefautControl);
-        this.newWardControl.setValue(this.newWardDefautControl);
+        this.newProvinceControl.setValue(null);
+        this.newWardControl.setValue(null);
 
-        this.oldProvinceControl.setValue(this.oldProvinceDefautControl);
-        this.oldDistrictControl.setValue(this.oldDistrictDefautControl);
-        this.oldWardControl.setValue(this.oldWardDefautControl);
+        this.oldProvinceControl.setValue(null);
+        this.oldDistrictControl.setValue(null);
+        this.oldWardControl.setValue(null);
 
         this.listOldProvince = this.oldProvince;
         this.listOldDistrict = [];
@@ -286,11 +380,11 @@ export class AddressMappingComponent implements OnInit {
     }
 
     onNewWardCleared(): void {
-        this.newWardControl.setValue(this.newWardDefautControl);
+        this.newWardControl.setValue(null);
 
-        this.oldDistrictControl.setValue(this.oldDistrictDefautControl);
+        this.oldDistrictControl.setValue(null);
         this.listOldDistrict = this.oldDistricts.filter(d => d.oldProvinceID === this.oldProvinceControl.value?.oldProvinceID);
-        this.oldWardControl.setValue(this.oldWardDefautControl);
+        this.oldWardControl.setValue(null);
         this.listOldWard = [];
     }
 }
